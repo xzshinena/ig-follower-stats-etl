@@ -1,0 +1,59 @@
+{
+  "relationships_following": [
+    {
+      "title": "userA",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/userA",
+          "timestamp": 1767199136
+        }
+      ]
+    },
+    {
+      "title": "userB",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/userB",
+          "timestamp": 1767109099
+        }
+      ]
+    },
+    {
+      "title": "jake_runs",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/jake_runs",
+          "timestamp": 1765978330
+        }
+      ]
+    },
+    {
+      "title": "noah_gaming",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/noah_gaming",
+          "timestamp": 1765688372
+        }
+      ]
+    },
+    {
+      "title": "ava_fitness",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/ava_fitness",
+          "timestamp": 1765479552
+        }
+      ]
+    },
+    {
+      "title": "ethan_codes",
+      "string_list_data": [
+        {
+          "href": "https://www.instagram.com/_u/ethan_codes",
+          "timestamp": 1765300000
+        }
+      ]
+    }
+  ]
+}
+
