@@ -20,3 +20,6 @@ You should recieve a zip file, two of the json files in it will separately hold 
 After importing file into workspace,
 copy paths into src/sets.py
 run python -m src.report
+
+Sample Dashboard:
+<img width="942" height="562" alt="Screenshot 2026-03-11 at 12 57 58 AM" src="https://github.com/user-attachments/assets/ac438682-906a-4705-ae16-ddc6cb4f6202" />
