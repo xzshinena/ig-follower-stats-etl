@@ -1,0 +1,148 @@
+<div class="layout">
+  <aside class="sidebar" [class.open]="sidebarOpen()">
+    <div class="sidebar-header">
+      <h2>How to Use</h2>
+      <button class="sidebar-close" (click)="toggleSidebar()" aria-label="Close sidebar">&times;</button>
+    </div>
+    <div class="sidebar-content">
+      <p>See Instagram follower statistics</p>
+
+      <h3>How to get the JSON files</h3>
+      <ol>
+        <li>IG Profile &rarr; <strong>Accounts Centre</strong> &rarr; <strong>Your information and permissions</strong> &rarr; <strong>Export your information</strong> &rarr; <strong>Past activity</strong> &rarr; <strong>Create export</strong> &rarr; <strong>Export to device</strong></li>
+      </ol>
+
+      <h3>Toggle settings for "Confirm your export"</h3>
+      <ul>
+        <li><strong>Customize Information</strong> &mdash; only check <em>Followers and following</em></li>
+        <li><strong>Date Range</strong> &mdash; All time</li>
+        <li><strong>Format</strong> &mdash; JSON</li>
+        <li><strong>Media quality</strong> &mdash; Low quality</li>
+      </ul>
+
+      <p>You should receive a zip file. Two of the JSON files in it will separately hold a list of all followers and a list of all following.</p>
+
+      <h3>Upload your files</h3>
+      <p>Drop or select both JSON files below, then click <strong>Upload &amp; Analyze</strong> to see your stats.</p>
+    </div>
+  </aside>
+
+  <div class="main-area" [class.shifted]="sidebarOpen()">
+    <div class="dashboard">
+      <header class="header">
+        <button class="menu-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+          <span class="menu-icon"></span>
+          <span class="menu-icon"></span>
+          <span class="menu-icon"></span>
+        </button>
+        <h1>IG Follower Stats</h1>
+      </header>
+
+      <section class="upload-section">
+        <div class="dropzone-row">
+          <div
+            class="dropzone"
+            [class.drag-over]="dragOverFollowers()"
+            [class.has-file]="followersFile()"
+            (dragover)="onDragOver($event, 'followers')"
+            (dragleave)="onDragLeave('followers')"
+            (drop)="onDrop($event, 'followers')"
+            (click)="followersInput.click()"
+          >
+            <input
+              #followersInput
+              type="file"
+              accept=".json"
+              hidden
+              (change)="onFileSelect($event, 'followers')"
+            />
+            <span class="dropzone-label">Followers JSON</span>
+            @if (followersFile()) {
+              <span class="dropzone-file">{{ followersFile()!.name }}</span>
+            } @else {
+              <span class="dropzone-hint">Drop file or click to browse</span>
+            }
+          </div>
+
+          <div
+            class="dropzone"
+            [class.drag-over]="dragOverFollowing()"
+            [class.has-file]="followingFile()"
+            (dragover)="onDragOver($event, 'following')"
+            (dragleave)="onDragLeave('following')"
+            (drop)="onDrop($event, 'following')"
+            (click)="followingInput.click()"
+          >
+            <input
+              #followingInput
+              type="file"
+              accept=".json"
+              hidden
+              (change)="onFileSelect($event, 'following')"
+            />
+            <span class="dropzone-label">Following JSON</span>
+            @if (followingFile()) {
+              <span class="dropzone-file">{{ followingFile()!.name }}</span>
+            } @else {
+              <span class="dropzone-hint">Drop file or click to browse</span>
+            }
+          </div>
+        </div>
+
+        <button
+          class="upload-btn"
+          [disabled]="!followersFile() || !followingFile() || loading()"
+          (click)="analyze()"
+        >
+          @if (loading()) {
+            <span class="spinner"></span> Analyzing...
+          } @else {
+            Upload &amp; Analyze
+          }
+        </button>
+
+        @if (error()) {
+          <p class="error-msg">{{ error() }}</p>
+        }
+      </section>
+
+      @if (analyzed()) {
+        <div class="grid">
+          <div class="card">
+            <span class="card-label">Total Followers</span>
+            <span class="card-value blue">{{ totalFollowers().toLocaleString() }}</span>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Total Following</span>
+            <span class="card-value blue">{{ totalFollowing().toLocaleString() }}</span>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Not Following Back</span>
+            <span class="card-value red">{{ notFollowingBack().toLocaleString() }}</span>
+          </div>
+
+          <div class="card">
+            <span class="card-label">You Don't Follow Back</span>
+            <span class="card-value orange">{{ youDontFollowBack().toLocaleString() }}</span>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Mutual Follows</span>
+            <span class="card-value green">{{ mutualFollows().toLocaleString() }}</span>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Follow-back Ratio</span>
+            <span class="card-value green">{{ followBackRatio() }}%</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@if (sidebarOpen()) {
+  <div class="overlay" (click)="toggleSidebar()"></div>
+}
