@@ -1,7 +1,14 @@
 See Instagram follower statistics
 
-How to get the json files:
-IG Profile -> Accounts Centre -> Your information and permissions -> Export your information -> Past activity -> Create export -> Export to device
+How to get the json files (steps):
+-> IG Profile 
+-> Settings 
+-> Accounts Centre 
+-> Your information and permissions 
+-> Export your information 
+-> Past activity 
+-> Create export 
+-> Export to device
 
 Toggle settings for "Confirm your export"
 - Customize Information -> only check 'Followers and following'
