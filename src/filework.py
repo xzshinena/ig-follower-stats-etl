@@ -24,8 +24,21 @@ def load_followers(filepath: str | Path) -> set[str] :
 def load_following(filepath: str | Path) -> set[str] :
     data = load_json(filepath)
     usernames = set()
-    
+
     for user in data.get("relationships_following", []) :
         usernames.add(user["title"])
-    
+
+    return usernames
+
+def parse_followers_data(data: list) -> set[str]:
+    usernames = set()
+    for user in data:
+        if user.get("string_list_data"):
+            usernames.add(user["string_list_data"][0]["value"])
+    return usernames
+
+def parse_following_data(data: dict) -> set[str]:
+    usernames = set()
+    for user in data.get("relationships_following", []):
+        usernames.add(user["title"])
     return usernames
